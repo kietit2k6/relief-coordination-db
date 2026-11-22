@@ -1,0 +1,99 @@
+Changed database context to 'DisasterReliefDB'.
+PassA|PassB
+-----|-----
+1|2
+== C1. Tổng hợp đối chiếu hai lượt ==
+VariantsCompared|SameRowCount|SameResultHash|NoResultSet|SameMedianReads|SamePlanShape|PlanShapeNotCaptured
+----------------|------------|--------------|-----------|---------------|-------------|--------------------
+77|77|76|1|77|76|0
+== C2. Các biến thể có khác biệt (kết quả, reads hoặc plan) ==
+CaseID|Variant|RowsA|RowsB|ReadsA|ReadsB|SameResult|SamePlanShape|PlanHashesA|PlanHashesB
+------|-------|-----|-----|------|------|----------|-------------|-----------|-----------
+SNIFF-PSP|E2 PSP ON compiled R1 -> run R1|322|322|293|293|1|0|0x1BF424F10785C78B|0x1BF424F10785C78B,0xD1F40544BB94EACB
+== C3. Toàn bộ bảng đối chiếu ==
+CaseID|Variant|RowsA|RowsB|ReadsA|ReadsB|CpuA|CpuB|ElapsedA|ElapsedB|SameResult|SamePlanShape
+------|-------|-----|-----|------|------|----|----|--------|--------|----------|-------------
+ANTIJOIN|a NOT EXISTS|3578|3578|60|60|4|4|4|4|1|1
+ANTIJOIN|b NOT IN (subquery co NULL)|0|0|57|57|2|1|1|1|1|1
+ANTIJOIN|c NOT IN + IS NOT NULL|3578|3578|59|59|4|3|4|3|1|1
+CA1-IDX|Q03 after IXDispatchOrderRequest|2529|2529|519|519|33|33|33|34|1|1
+CA1-IDX|Q03 before (PK only)|2529|2529|803|803|38|37|38|38|1|1
+CA1-IDX|Q04 after IXDispatchOrderRequest|2529|2529|643|643|44|45|44|46|1|1
+CA1-IDX|Q04 before (PK only)|2529|2529|839|839|46|50|46|50|1|1
+CA3-IDX|L1.4 narrow no INCLUDE | R1|322|322|293|293|3|4|3|3|1|1
+CA3-IDX|L1.4 narrow no INCLUDE | R16|8|8|23|23|0|0|0|0|1|1
+CA3-IDX|L1.5 key order CreatedAt first | R1|322|322|140|140|2|2|2|2|1|1
+CA3-IDX|L1.5 key order CreatedAt first | R16|8|8|140|140|1|2|1|2|1|1
+CA3-IDX|S0 baseline PK only | R1|322|322|293|293|4|3|3|4|1|1
+CA3-IDX|S0 baseline PK only | R16|8|8|293|293|2|2|3|3|1|1
+CA3-IDX|S1 IXReliefRequestRegionStatus | R1|322|322|5|5|0|0|1|0|1|1
+CA3-IDX|S1 IXReliefRequestRegionStatus | R16|8|8|3|3|0|0|0|0|1|1
+CA3-IDX|S2 filtered IXReliefRequestPending | R1|322|322|4|4|0|1|1|0|1|1
+CA3-IDX|S2 filtered IXReliefRequestPending | R16|8|8|2|2|0|0|0|0|1|1
+CA3-IDX|S2 filtered, Status as @param | R1|322|322|293|293|4|3|3|3|1|1
+CA3-IDX|S3 both report + filtered | R1|322|322|5|5|1|0|1|1|1|1
+CURSOR|a cursor + PRINT (Ma nguon 1.3)|0|0|2858|2858|13|12|13|12|NULL|1
+CURSOR|b set-based|691|691|48|48|4|4|4|5|1|1
+CURSOR|c cursor capture (kiem tra nghia)|691|691|3650|3650|20|20|20|20|1|1
+IVIEW|Q04 Ca 2 | indexed view|2529|2529|643|643|42|42|42|42|1|1
+IVIEW|Q04 Ca 2 | no view|2529|2529|643|643|43|44|43|45|1|1
+IVIEW|stock by region-item | indexed view|3800|3800|18|18|2|2|2|2|1|1
+IVIEW|stock by region-item | no view|3800|3800|29|29|7|9|7|9|1|1
+NCCI|AuditLog monthly | + NCCI|48|48|166|166|97|100|97|101|1|1
+NCCI|AuditLog monthly | rowstore PK only|48|48|647|647|226|223|44|45|1|1
+NCCI|DispatchOrder monthly | + NCCI|387|387|162|162|46|45|46|45|1|1
+NCCI|DispatchOrder monthly | rowstore PK only|387|387|525|525|176|181|29|34|1|1
+PAGE-AUDIT|keyset page 60|50|50|6|6|0|1|0|0|1|1
+PAGE-AUDIT|OFFSET page 60|50|50|21|21|1|1|1|1|1|1
+PAGE-DISPATCH|keyset page 2|50|50|6|6|0|0|0|0|1|1
+PAGE-DISPATCH|keyset page 7|50|50|6|6|0|0|0|0|1|1
+PAGE-DISPATCH|OFFSET page 2|50|50|3|3|0|1|0|0|1|1
+PAGE-DISPATCH|OFFSET page 7|50|50|5|5|0|1|0|0|1|1
+Q06-IDX|after IXDispatchOrderWarehouseItem|99|99|5|5|1|0|1|0|1|1
+Q06-IDX|before (PK only)|99|99|510|510|5|6|5|5|1|1
+S1-DATE|a YEAR()/MONTH()/DAY() on column|300|300|583|583|17|17|18|17|1|1
+S1-DATE|b CONVERT(CHAR(8), column, 112)|300|300|583|583|19|19|19|19|1|1
+S1-DATE|c CAST(column AS DATE)|300|300|7|7|0|0|1|1|1|1
+S1-DATE|d half-open range on column|300|300|5|5|0|0|0|0|1|1
+S2-PHONE|a @Phone VARCHAR(20)|1|1|2|2|0|0|0|0|1|1
+S2-PHONE|b @Phone NVARCHAR(20)|1|1|52|52|1|1|1|1|1|1
+S2-STATUS|a @Status VARCHAR(20) | R1|322|322|5|5|1|0|0|1|1|1
+S2-STATUS|b @Status NVARCHAR(20) | R1|322|322|72|72|2|2|2|2|1|1
+S3-LIKE|a LIKE '%' + suffix (ma 01234)|1|1|34|34|8|7|7|7|1|1
+S3-LIKE|b LIKE prefix + '%' (Nguyen Van An...)|9|9|2|2|0|0|0|0|1|1
+S4-OR|a OR|24|24|4|4|0|0|0|0|1|1
+S4-OR|b UNION ALL (bu trung)|24|24|4|4|0|0|0|0|1|1
+S5-ISNULL|a ISNULL(col) | DonorID=777|1|1|276|276|6|6|6|6|1|1
+S5-ISNULL|a ISNULL(col) | DonorID=NULL|1|1|276|276|7|7|7|7|1|1
+S5-ISNULL|b OR IS NULL | DonorID=777|1|1|2|2|0|0|0|0|1|1
+S5-ISNULL|b OR IS NULL | DonorID=NULL|1|1|30|30|3|3|3|3|1|1
+SEMIJOIN|a EXISTS|1422|1422|60|60|3|3|3|3|1|1
+SEMIJOIN|b IN|1422|1422|60|60|3|3|3|3|1|1
+SEMIJOIN|c JOIN + DISTINCT|1422|1422|60|60|3|3|3|3|1|1
+SEMIJOIN|d JOIN without DISTINCT (sai nghia)|1685|1685|60|60|3|3|3|3|1|1
+SNIFF-FIX|D1 OPTION(RECOMPILE) | R1|322|322|319|319|6|6|6|7|1|1
+SNIFF-FIX|D1 OPTION(RECOMPILE) | R16|8|8|55|55|2|2|2|2|1|1
+SNIFF-FIX|D2 OPTIMIZE FOR R1 | R1|322|322|293|293|3|3|4|4|1|1
+SNIFF-FIX|D2 OPTIMIZE FOR R1 | R16|8|8|293|293|2|3|2|3|1|1
+SNIFF-FIX|D3 OPTIMIZE FOR UNKNOWN | R1|322|322|293|293|4|4|4|4|1|1
+SNIFF-FIX|D3 OPTIMIZE FOR UNKNOWN | R16|8|8|293|293|2|3|3|2|1|1
+SNIFF-OFF|C1 compiled R16 -> run R1|322|322|688|688|1|1|1|1|1|1
+SNIFF-OFF|C1 compiled R16 -> run R16|8|8|23|23|1|0|0|0|1|1
+SNIFF-OFF|C2 compiled R1 -> run R1|322|322|293|293|3|4|4|4|1|1
+SNIFF-OFF|C2 compiled R1 -> run R16|8|8|293|293|2|3|3|3|1|1
+SNIFF-PSP|E1 PSP ON compiled R16 -> run R1|322|322|688|688|1|1|1|1|1|1
+SNIFF-PSP|E1 PSP ON compiled R16 -> run R16|8|8|23|23|0|0|0|0|1|1
+SNIFF-PSP|E2 PSP ON compiled R1 -> run R1|322|322|293|293|4|3|3|4|1|0
+SNIFF-PSP|E2 PSP ON compiled R1 -> run R16|8|8|293|293|3|3|2|3|1|1
+STATS-EST|own compile | R1|322|322|293|293|4|4|4|4|1|1
+STATS-EST|own compile | R16|8|8|23|23|0|0|0|0|1|1
+WINDOW|a correlated MAX subquery | R4|1610|1610|397|397|25|25|24|25|1|1
+WINDOW|b MAX() OVER (PARTITION BY) | R4|1610|1610|16464|16464|24|25|24|24|1|1
+WINDOW|c GROUP BY MAX + JOIN | R4|1610|1610|778|778|44|46|45|46|1|1
+== C4. So sánh tương đương trong từng lượt (lab.Equivalence) ==
+PassNo|Expected|Checks|Equal|NotEqual
+------|--------|------|-----|--------
+1|DIFFERENT|2|0|2
+1|SAME|38|38|0
+2|DIFFERENT|2|0|2
+2|SAME|38|38|0

@@ -1,0 +1,9 @@
+Đã tạo database DisasterReliefDB.
+Changed database context to 'DisasterReliefDB'.
+The module 'usp_Measure' depends on the missing object 'lab.usp_Fingerprint'. The module will still be created; however, it cannot run successfully until the object exists.
+ProductMajorVersion|ProductVersion|UpdateLevel|Edition|compatibility_level|recovery_model_desc|collation_name|QueryStoreState|query_capture_mode_desc
+-------------------|--------------|-----------|-------|-------------------|-------------------|--------------|---------------|-----------------------
+17|17.0.5005.3|CU9|Enterprise Developer Edition (64-bit)|170|FULL|SQL_Latin1_General_CP1_CI_AS|READ_WRITE|ALL
+Tables|Columns
+------|-------
+9|44
